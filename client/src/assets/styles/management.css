@@ -1,0 +1,426 @@
+.management {
+  width: min(100%, 1120px);
+  margin: 16px auto;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid #e3eaf7;
+  background: #fff;
+  box-shadow: var(--shadow-md);
+}
+
+.management h2 {
+  text-align: center;
+  margin: 0 0 14px;
+  color: #1f56cf;
+  font-size: 1.95rem;
+  font-weight: 800;
+}
+
+.management-error {
+  color: var(--danger);
+  text-align: center;
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+
+.management .team-member-management {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.management .team-member-management input {
+  width: 100%;
+  border: 1px solid #d7e0ef;
+  border-radius: 10px;
+  padding: 11px 12px;
+  background: #f8faff;
+}
+
+.management .team-member-management input:focus {
+  outline: none;
+  border-color: #2f6df6;
+  box-shadow: 0 0 0 4px rgba(47, 109, 246, 0.14);
+}
+
+.management .team-member-management button {
+  border: none;
+  border-radius: 10px;
+  padding: 11px 16px;
+  min-width: 130px;
+  background: #0ea472;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.management .team-member-management button:hover {
+  background: #0a8f62;
+}
+
+.management .team-list {
+  grid-column: 1 / -1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.management .team-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #e4ebf8;
+  border-radius: 10px;
+  background: #fbfcff;
+  color: #23365a;
+  font-weight: 600;
+}
+
+.management .remove-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: #df4453;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.management .remove-btn:hover {
+  background: #c93748;
+}
+
+.management .add-task-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 170px 130px 200px auto;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.management .add-task-form input,
+.management .add-task-form select {
+  width: 100%;
+  border: 1px solid #d7e0ef;
+  border-radius: 10px;
+  padding: 11px 12px;
+  background: #f8faff;
+}
+
+.management .add-task-form input:focus,
+.management .add-task-form select:focus {
+  outline: none;
+  border-color: #2f6df6;
+  box-shadow: 0 0 0 4px rgba(47, 109, 246, 0.14);
+}
+
+.management .add-task-form button {
+  border: none;
+  border-radius: 10px;
+  padding: 11px 16px;
+  background: #2f6df6;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.management .add-task-form button:hover {
+  background: #1f56cf;
+}
+
+.management .team-dropdowns {
+  display: grid;
+  gap: 12px;
+}
+
+.management .member-dropdown {
+  width: 100%;
+}
+
+.management .dropdown-btn {
+  width: 100%;
+  border: 1px solid #d7e0ef;
+  border-radius: 11px;
+  background: #eef4ff;
+  color: #23406f;
+  padding: 11px 13px;
+  text-align: left;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.management .member-dropdown:hover .dropdown-btn {
+  background: #e4eeff;
+}
+
+.management .member-dropdown .dropdown-content {
+  display: none;
+  position: relative;
+  top: auto;
+  right: auto;
+  width: 100%;
+  margin-top: 8px;
+  border-radius: 11px;
+  border: 1px solid #e4ebf8;
+  background: #fbfcff;
+  padding: 10px;
+}
+
+.management .member-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.management .member-dropdown .task-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  border-radius: 9px;
+  background: #fff;
+  border: 1px solid #e4ebf8;
+}
+
+.management .member-dropdown .task-item.done .task-title {
+  text-decoration: line-through;
+  color: #7c8ca7;
+}
+
+.management .member-dropdown .task-item input {
+  width: 16px;
+  height: 16px;
+  accent-color: #2f6df6;
+}
+
+.management .task-title {
+  color: #1f304e;
+  font-weight: 600;
+}
+
+.management .task-priority {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.management .task-priority.urgent { background: #e44d5e; }
+.management .task-priority.high { background: #f1b321; color: #3d2f0a; }
+.management .task-priority.medium { background: #0ea472; }
+.management .task-priority.low { background: #2f6df6; }
+
+.management-task-board {
+  margin-top: 22px;
+  border: 1px solid #e4ebf8;
+  border-radius: 14px;
+  background: #fbfcff;
+  overflow: hidden;
+}
+
+.management-task-board h3 {
+  margin: 0;
+  padding: 12px 14px;
+  background: #eef4ff;
+  color: #23406f;
+  font-size: 1rem;
+}
+
+.management-task-head {
+  display: grid;
+  grid-template-columns: 1.6fr 1.2fr 1fr 0.8fr 2fr;
+  gap: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid #e4ebf8;
+  border-bottom: 1px solid #e4ebf8;
+  color: #5a6e8f;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.management-task-list {
+  display: grid;
+  gap: 8px;
+  padding: 10px 14px 14px;
+}
+
+.management-task-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1.2fr 1fr 0.8fr 2fr;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 8px;
+  border: 1px solid #e4ebf8;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.management-task-row.done {
+  opacity: 0.72;
+}
+
+.management-task-row.done .m-task-title {
+  text-decoration: line-through;
+}
+
+.m-task-title {
+  font-weight: 700;
+  color: #1f304e;
+}
+
+.m-task-member {
+  color: #506281;
+  font-weight: 600;
+}
+
+.m-task-due {
+  color: #506281;
+  font-weight: 600;
+}
+
+.management-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.status-toggle-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #2f6df6;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.status-toggle-btn:hover {
+  background: #1f56cf;
+}
+
+.edit-task-btn,
+.comment-task-btn,
+.delete-task-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.edit-task-btn {
+  background: #2f6df6;
+}
+
+.edit-task-btn:hover {
+  background: #1f56cf;
+}
+
+.comment-task-btn {
+  background: #0ea472;
+}
+
+.comment-task-btn:hover {
+  background: #0a8f62;
+}
+
+.delete-task-btn {
+  background: #df4453;
+}
+
+.delete-task-btn:hover {
+  background: #c93748;
+}
+
+.management-activity {
+  margin-top: 22px;
+  border: 1px solid #e4ebf8;
+  border-radius: 14px;
+  background: #fbfcff;
+  overflow: hidden;
+}
+
+.management-activity h3 {
+  margin: 0;
+  padding: 12px 14px;
+  background: #eef4ff;
+  color: #23406f;
+  font-size: 1rem;
+}
+
+.activity-row {
+  padding: 10px 14px;
+  border-top: 1px solid #e4ebf8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.activity-row p {
+  margin: 0;
+  color: #324766;
+  font-size: 13px;
+}
+
+.activity-row span {
+  color: #6b80a1;
+  font-size: 12px;
+}
+
+.management-empty {
+  margin: 8px 0;
+  text-align: center;
+  color: #687d9f;
+  font-weight: 600;
+}
+
+@media (max-width: 960px) {
+  .management {
+    padding: 18px;
+    margin: 12px auto;
+  }
+
+  .management .add-task-form {
+    grid-template-columns: 1fr;
+  }
+
+  .management .team-member-management {
+    grid-template-columns: 1fr;
+  }
+
+  .management .team-member-management button {
+    width: 100%;
+  }
+
+  .management-task-head,
+  .management-task-row {
+    grid-template-columns: 1fr;
+  }
+
+  .management-actions {
+    width: 100%;
+  }
+
+  .management-actions button {
+    flex: 1;
+  }
+
+  .activity-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
