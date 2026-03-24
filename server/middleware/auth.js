@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.JWT_SECRET || "devflow_jwt_secret";
+const PRIVILEGED_ROLES = new Set(["admin", "management"]);
 
 const requireAuth = (req, res, next) => {
   const authHeader = req.headers.authorization || "";
@@ -27,4 +28,12 @@ const requireRole = (...roles) => (req, res, next) => {
   next();
 };
 
-module.exports = { requireAuth, requireRole, JWT_SECRET };
+const forbidRole = (...roles) => (req, res, next) => {
+  if (req.user && roles.includes(req.user.role)) {
+    return res.status(403).json({ success: false, message: "Forbidden for this role" });
+  }
+
+  next();
+};
+
+module.exports = { requireAuth, requireRole, forbidRole, JWT_SECRET, PRIVILEGED_ROLES };

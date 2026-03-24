@@ -46,7 +46,14 @@ export default function Visualization() {
     { name: "Remaining", value: pending },
   ];
 
-  const COLORS = ["#e74a3b", "#f6c23e", "#1cc88a", "#36b9cc"];
+  const COLORS = ["#ff6b8a", "#ffc857", "#2fe0d0", "#6f9bff"];
+  const chartTextColor = "#d9e8ff";
+  const tooltipStyle = {
+    backgroundColor: "#141414",
+    border: "1px solid rgba(255,255,255,0.25)",
+    borderRadius: "10px",
+    color: "#f2f2f2",
+  };
 
   return (
     <div className="visualization">
@@ -81,9 +88,9 @@ export default function Visualization() {
             <h3>Tasks by Priority</h3>
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={priorityData}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
+                <XAxis dataKey="name" stroke={chartTextColor} />
+                <YAxis stroke={chartTextColor} />
+                <Tooltip contentStyle={tooltipStyle} />
                 <Bar dataKey="value">
                   {priorityData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -108,11 +115,11 @@ export default function Visualization() {
                   outerRadius={80}
                   label
                 >
-                  <Cell fill="#1cc88a" />
-                  <Cell fill="#e74a3b" />
+                  <Cell fill="#2fe0d0" />
+                  <Cell fill="#ff6b8a" />
                 </Pie>
-                <Tooltip />
-                <Legend />
+                <Tooltip contentStyle={tooltipStyle} />
+                <Legend wrapperStyle={{ color: chartTextColor }} />
               </PieChart>
             </ResponsiveContainer>
           </div>

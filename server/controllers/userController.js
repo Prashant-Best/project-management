@@ -1,8 +1,8 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("../middleware/auth");
-const ALLOWED_ROLES = new Set(["management", "team_member"]);
+const { JWT_SECRET, PRIVILEGED_ROLES } = require("../middleware/auth");
+const ALLOWED_ROLES = new Set(["admin", "management", "team_member", "viewer"]);
 
 const getUsers = async (_req, res) => {
   try {
@@ -65,6 +65,38 @@ const deleteUser = async (req, res) => {
     }
 
     res.status(200).json({ success: true, message: "User deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const updateUserRole = async (req, res) => {
+  const role = (req.body?.role || "").trim();
+
+  if (!ALLOWED_ROLES.has(role)) {
+    return res.status(400).json({ success: false, message: "Invalid role selected" });
+  }
+
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    user.role = role;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "User role updated",
+      data: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        phone: user.phone || "",
+      },
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -162,7 +194,7 @@ const updateProfile = async (req, res) => {
   }
 
   if (
-    req.user.role === "management" &&
+    PRIVILEGED_ROLES.has(req.user.role) &&
     typeof req.body.role === "string" &&
     ALLOWED_ROLES.has(req.body.role)
   ) {
@@ -219,6 +251,7 @@ module.exports = {
   getUsers,
   createUsers,
   deleteUser,
+  updateUserRole,
   loginUser,
   getCurrentUser,
   updateProfile,

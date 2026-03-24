@@ -89,8 +89,10 @@ export default function Signup() {
 
           <label>Role</label>
           <select value={role} onChange={(e) => setRole(e.target.value)} required>
+            <option value="viewer">Viewer</option>
             <option value="team_member">Team Member</option>
             <option value="management">Management</option>
+            <option value="admin">Admin</option>
           </select>
 
           {error && <p className="signup-error">{error}</p>}

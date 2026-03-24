@@ -4,43 +4,40 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
-  background:
-    radial-gradient(circle at 0% 0%, rgba(47, 109, 246, 0.22) 0%, transparent 45%),
-    radial-gradient(circle at 100% 100%, rgba(14, 164, 114, 0.22) 0%, transparent 45%),
-    #edf2fb;
+  padding: 28px 20px;
 }
 
 .login-card,
 .signup-card {
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid #deE7F8;
-  backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, rgba(24, 35, 66, 0.96), rgba(15, 24, 46, 0.94));
+  border: var(--border);
+  backdrop-filter: blur(10px);
   width: 100%;
-  max-width: 430px;
-  padding: 34px;
-  border-radius: 20px;
-  box-shadow: 0 20px 42px rgba(38, 67, 119, 0.16);
+  max-width: 470px;
+  padding: 36px;
+  border-radius: 22px;
+  box-shadow: var(--shadow-lg);
   text-align: left;
+  animation: fadeUp 0.42s ease both;
 }
 
 .login-card h1,
 .signup-card h1 {
   margin: 0 0 24px;
   text-align: center;
-  color: #1e3a8a;
+  color: var(--accent);
   font-size: 2rem;
   line-height: 1.2;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .login-card label,
 .signup-card label {
   display: block;
-  color: #273652;
+  color: var(--text-soft);
   font-size: 13px;
   font-weight: 700;
-  margin: 12px 0 8px;
+  margin: 13px 0 8px;
 }
 
 .login-card input,
@@ -49,56 +46,54 @@
 .signup-card select {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #d6dfef;
+  border: var(--border);
   border-radius: 11px;
-  background: #f9fbff;
-  color: #1f2b41;
+  background: var(--surface-soft);
+  color: var(--text);
   font-size: 15px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .login-card input:focus,
 .signup-card input:focus,
 .login-card select:focus,
 .signup-card select:focus {
-  border-color: #2f6df6;
-  box-shadow: 0 0 0 4px rgba(47, 109, 246, 0.15);
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12);
   outline: none;
 }
 
 .login-card button,
 .signup-card button {
   width: 100%;
-  border: none;
+  border: 1px solid rgba(126, 200, 255, 0.65);
   border-radius: 11px;
   padding: 12px;
   margin-top: 18px;
-  background: linear-gradient(120deg, #1f56cf 0%, #2f6df6 100%);
-  color: #fff;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: #f7fbff;
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.2px;
   cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.2s ease;
 }
 
 .login-card button:hover,
 .signup-card button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(47, 109, 246, 0.3);
+  box-shadow: 0 10px 22px rgba(79, 124, 255, 0.38);
 }
 
 .login-error,
 .signup-error {
   margin-top: 10px;
-  color: #d83447;
+  color: var(--danger);
   font-size: 13px;
   font-weight: 600;
 }
 
 .signup-success {
   margin-top: 10px;
-  color: #0a9f6e;
+  color: var(--success);
   font-size: 13px;
   font-weight: 600;
 }
@@ -107,14 +102,14 @@
 .signup-switch {
   margin: 16px 0 0;
   text-align: center;
-  color: #5d6f8d;
+  color: var(--muted);
   font-size: 13px;
   font-weight: 500;
 }
 
 .login-switch a,
 .signup-switch a {
-  color: #1f56cf;
+  color: #9be7ff;
   font-weight: 700;
   text-decoration: none;
 }
@@ -125,41 +120,27 @@
 }
 
 .popup-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(8, 21, 46, 0.42);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 16px;
+  z-index: 1100;
 }
 
 .popup-card {
-  width: 100%;
-  max-width: 380px;
-  background: #fff;
-  border: 1px solid #dce7f8;
-  border-radius: 16px;
-  padding: 24px 22px;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(15, 30, 58, 0.24);
+  max-width: 400px;
 }
 
 .popup-card h3 {
   margin: 0 0 8px;
-  color: #1f56cf;
 }
 
 .popup-card p {
   margin: 0 0 16px;
-  color: #425775;
 }
 
 .popup-card button {
   width: auto;
   min-width: 132px;
   margin-top: 0;
+  border: 1px solid rgba(126, 200, 255, 0.7);
 }
 
 @media (max-width: 640px) {

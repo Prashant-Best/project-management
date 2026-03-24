@@ -1,0 +1,91 @@
+.notifications-center {
+  min-height: calc(100vh - 250px);
+  border: var(--border);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 16px;
+}
+
+.notifications-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.notifications-head h2 {
+  margin: 0;
+  color: var(--accent);
+}
+
+.notifications-head button {
+  border: 1px solid rgba(126, 200, 255, 0.72);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #f7fbff;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.notifications-head button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.notifications-subtitle {
+  color: var(--text-soft);
+  margin: 8px 0 12px;
+}
+
+.notifications-list {
+  display: grid;
+  gap: 10px;
+}
+
+.notification-item {
+  border: var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.notification-item.unread {
+  border-color: rgba(123, 216, 255, 0.65);
+  box-shadow: 0 0 0 1px rgba(123, 216, 255, 0.15) inset;
+}
+
+.notification-item h4 {
+  margin: 0 0 4px;
+}
+
+.notification-item p {
+  margin: 0 0 6px;
+  color: var(--text-soft);
+}
+
+.notification-item span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.notification-item button {
+  height: fit-content;
+  border: 1px solid rgba(126, 200, 255, 0.72);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.notifications-error {
+  color: var(--danger);
+}
+
+.notifications-empty {
+  color: var(--text-soft);
+}

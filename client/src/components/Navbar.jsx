@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "../assets/styles/navbar.css";
 
-export default function Navbar() {
+export default function Navbar({ unreadNotifications = 0 }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -23,6 +23,9 @@ export default function Navbar() {
         </button>
         <button className="contacts-btn" onClick={() => navigate("/home/contacts")}>
           Contacts
+        </button>
+        <button className="contacts-btn" onClick={() => navigate("/home/notifications")}>
+          Alerts {unreadNotifications > 0 ? `(${unreadNotifications})` : ""}
         </button>
         <button className="logout-btn nav-logout-btn" onClick={handleLogout}>
           Logout

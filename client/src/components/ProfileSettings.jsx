@@ -10,6 +10,8 @@ export default function ProfileSettings() {
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const currentUser = JSON.parse(localStorage.getItem("loggedInUser") || "{}");
+  const canEditRole = currentUser?.role === "management" || currentUser?.role === "admin";
 
   const fetchProfile = async () => {
     try {
@@ -95,10 +97,12 @@ export default function ProfileSettings() {
             <select
               value={profile.role}
               onChange={(e) => setProfile({ ...profile, role: e.target.value })}
-              disabled={profile.role !== "management"}
+              disabled={!canEditRole}
             >
+              <option value="viewer">Viewer</option>
               <option value="team_member">Team Member</option>
               <option value="management">Management</option>
+              <option value="admin">Admin</option>
             </select>
 
             <button type="submit">Save Profile</button>

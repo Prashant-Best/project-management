@@ -1,19 +1,24 @@
 .management {
-  width: min(100%, 1120px);
+  width: min(100%, 1280px);
   margin: 16px auto;
-  padding: 24px;
+  padding: 22px;
   border-radius: 18px;
-  border: 1px solid #e3eaf7;
-  background: #fff;
-  box-shadow: var(--shadow-md);
+  border: var(--border);
+  background: linear-gradient(180deg, rgba(22, 33, 64, 0.98), rgba(12, 18, 38, 0.96));
+  box-shadow: var(--shadow-lg);
+  animation: fadeUp 0.45s ease both;
 }
 
 .management h2 {
   text-align: center;
   margin: 0 0 14px;
-  color: #1f56cf;
-  font-size: 1.95rem;
-  font-weight: 800;
+  color: var(--accent);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.management h3 {
+  color: var(--accent);
 }
 
 .management-error {
@@ -31,33 +36,54 @@
   margin-bottom: 18px;
 }
 
-.management .team-member-management input {
+.management .team-member-management input,
+.management .add-task-form input,
+.management .add-task-form select,
+.management-modal-body input,
+.management-modal-body textarea {
   width: 100%;
-  border: 1px solid #d7e0ef;
+  border: var(--border);
   border-radius: 10px;
   padding: 11px 12px;
-  background: #f8faff;
+  background: var(--surface-soft);
+  color: var(--text);
 }
 
-.management .team-member-management input:focus {
+.management .team-member-management input:focus,
+.management .add-task-form input:focus,
+.management .add-task-form select:focus,
+.management-modal-body input:focus,
+.management-modal-body textarea:focus {
   outline: none;
-  border-color: #2f6df6;
-  box-shadow: 0 0 0 4px rgba(47, 109, 246, 0.14);
+  border-color: rgba(255, 255, 255, 0.56);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.11);
 }
 
-.management .team-member-management button {
-  border: none;
+.management .team-member-management button,
+.management .add-task-form button,
+.status-toggle-btn,
+.edit-task-btn,
+.comment-task-btn,
+.delete-task-btn,
+.management-modal-footer button {
+  border: 1px solid rgba(126, 200, 255, 0.72);
   border-radius: 10px;
-  padding: 11px 16px;
-  min-width: 130px;
-  background: #0ea472;
-  color: white;
+  padding: 10px 14px;
+  color: #f7fbff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  font-size: 12px;
   font-weight: 700;
   cursor: pointer;
 }
 
-.management .team-member-management button:hover {
-  background: #0a8f62;
+.management .team-member-management button:hover,
+.management .add-task-form button:hover,
+.status-toggle-btn:hover,
+.edit-task-btn:hover,
+.comment-task-btn:hover,
+.delete-task-btn:hover,
+.management-modal-footer button:hover {
+  background: linear-gradient(135deg, var(--primary-strong), #6c45e6);
 }
 
 .management .team-list {
@@ -75,108 +101,333 @@
   justify-content: space-between;
   gap: 10px;
   padding: 10px 12px;
-  border: 1px solid #e4ebf8;
+  border: var(--border);
   border-radius: 10px;
-  background: #fbfcff;
-  color: #23365a;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
   font-weight: 600;
 }
 
 .management .remove-btn {
-  border: none;
+  border: var(--border);
   border-radius: 8px;
   padding: 6px 10px;
-  background: #df4453;
-  color: #fff;
-  font-weight: 700;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-weight: 600;
   font-size: 12px;
   cursor: pointer;
 }
 
 .management .remove-btn:hover {
-  background: #c93748;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .management .add-task-form {
   display: grid;
-  grid-template-columns: 1fr 1fr 170px 130px 200px auto;
+  grid-template-columns: 1fr 1fr 170px 130px 170px 180px auto;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
-.management .add-task-form input,
-.management .add-task-form select {
-  width: 100%;
-  border: 1px solid #d7e0ef;
+.management-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.admin-user-section {
+  margin-bottom: 16px;
+  border: var(--border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px;
+}
+
+.admin-user-section h3 {
+  margin: 0 0 10px;
+}
+
+.admin-user-list {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-user-row {
+  border: var(--border);
   border-radius: 10px;
-  padding: 11px 12px;
-  background: #f8faff;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
 }
 
-.management .add-task-form input:focus,
-.management .add-task-form select:focus {
-  outline: none;
-  border-color: #2f6df6;
-  box-shadow: 0 0 0 4px rgba(47, 109, 246, 0.14);
+.admin-user-meta {
+  display: grid;
+  gap: 3px;
 }
 
-.management .add-task-form button {
-  border: none;
-  border-radius: 10px;
-  padding: 11px 16px;
-  background: #2f6df6;
-  color: #fff;
+.admin-user-meta span {
+  color: var(--text-soft);
+  font-size: 13px;
+}
+
+.admin-user-controls {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.admin-user-controls select {
+  border: var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: var(--surface-soft);
+  color: var(--text);
+}
+
+.admin-user-controls button {
+  border: 1px solid rgba(126, 200, 255, 0.72);
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #f7fbff;
+  padding: 8px 10px;
   font-weight: 700;
   cursor: pointer;
 }
 
-.management .add-task-form button:hover {
-  background: #1f56cf;
+.admin-project-section {
+  margin-bottom: 16px;
+  border: var(--border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px;
 }
 
-.management .team-dropdowns {
+.admin-project-section h3 {
+  margin: 0 0 10px;
+}
+
+.admin-project-create {
   display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.admin-project-create input,
+.admin-project-user-row select,
+.admin-project-manage select,
+.admin-project-member-controls select {
+  border: var(--border);
+  border-radius: 8px;
+  background: var(--surface-soft);
+  color: var(--text);
+  padding: 8px 10px;
+}
+
+.admin-project-create button,
+.admin-project-add-member button,
+.admin-project-member-controls button {
+  border: 1px solid rgba(126, 200, 255, 0.72);
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #f7fbff;
+  padding: 8px 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-project-user-pool {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+.admin-project-user-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-project-user-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-soft);
+}
+
+.admin-project-manage {
+  border: var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-project-manage-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.admin-project-manage-head h4 {
+  margin: 0;
+}
+
+.admin-project-add-member {
+  display: grid;
+  grid-template-columns: 1fr 180px auto;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.admin-project-member-list {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-project-member-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-project-member-row span {
+  display: block;
+  color: var(--text-soft);
+  font-size: 12px;
+}
+
+.admin-project-member-controls {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.admin-project-member-controls .danger-btn {
+  background: linear-gradient(135deg, #ff6b8a, #ff8b60);
+  border-color: rgba(255, 155, 140, 0.75);
+}
+
+.admin-bulk-delete-section {
+  margin-top: 10px;
+  border: var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-bulk-delete-section h4 {
+  margin: 0 0 10px;
+}
+
+.admin-bulk-delete-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.admin-bulk-delete-grid select {
+  border: var(--border);
+  border-radius: 8px;
+  background: var(--surface-soft);
+  color: var(--text);
+  padding: 8px 10px;
+}
+
+.admin-bulk-delete-grid .danger-btn {
+  border: 1px solid rgba(255, 155, 140, 0.75);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff6b8a, #ff8b60);
+  color: #fff;
+  padding: 8px 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.management-summary-card {
+  border: var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 12px;
+}
+
+.management-summary-card h4 {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.management-summary-card p {
+  margin: 5px 0 0;
+  font-size: 21px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.management-export-btn {
+  align-self: stretch;
+  border: 1px solid rgba(126, 200, 255, 0.72);
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #f7fbff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.management .team-sub-lists {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 12px;
 }
 
-.management .member-dropdown {
-  width: 100%;
-}
-
-.management .dropdown-btn {
-  width: 100%;
-  border: 1px solid #d7e0ef;
-  border-radius: 11px;
-  background: #eef4ff;
-  color: #23406f;
-  padding: 11px 13px;
-  text-align: left;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.management .member-dropdown:hover .dropdown-btn {
-  background: #e4eeff;
-}
-
-.management .member-dropdown .dropdown-content {
-  display: none;
-  position: relative;
-  top: auto;
-  right: auto;
-  width: 100%;
-  margin-top: 8px;
-  border-radius: 11px;
-  border: 1px solid #e4ebf8;
-  background: #fbfcff;
+.management .member-sub-list {
+  border: var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
   padding: 10px;
 }
 
-.management .member-dropdown:hover .dropdown-content {
-  display: block;
+.management .member-sub-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
-.management .member-dropdown .task-item {
+.management .member-sub-list-head h4 {
+  margin: 0;
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.management .member-sub-list-head span {
+  color: var(--text-soft);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.member-sub-list-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.management .member-sub-list .task-item {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -184,23 +435,23 @@
   padding: 8px 10px;
   margin-bottom: 8px;
   border-radius: 9px;
-  background: #fff;
-  border: 1px solid #e4ebf8;
+  background: rgba(255, 255, 255, 0.04);
+  border: var(--border);
 }
 
-.management .member-dropdown .task-item.done .task-title {
+.management .member-sub-list .task-item.done .task-title {
   text-decoration: line-through;
-  color: #7c8ca7;
+  color: var(--muted);
 }
 
-.management .member-dropdown .task-item input {
+.management .member-sub-list .task-item input {
   width: 16px;
   height: 16px;
-  accent-color: #2f6df6;
+  accent-color: var(--accent);
 }
 
 .management .task-title {
-  color: #1f304e;
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -210,28 +461,53 @@
   font-size: 10.5px;
   font-weight: 800;
   text-transform: uppercase;
-  color: #fff;
+  color: #f8fbff;
 }
 
-.management .task-priority.urgent { background: #e44d5e; }
-.management .task-priority.high { background: #f1b321; color: #3d2f0a; }
-.management .task-priority.medium { background: #0ea472; }
-.management .task-priority.low { background: #2f6df6; }
+.management .task-priority.urgent { background: linear-gradient(135deg, #ff5f88, #ff8b60); }
+.management .task-priority.high { background: linear-gradient(135deg, #ffb347, #ffcf5a); color: #2a1b00; }
+.management .task-priority.medium { background: linear-gradient(135deg, #2fe0d0, #22b8e6); }
+.management .task-priority.low { background: linear-gradient(135deg, #6fa0ff, #8b5cf6); }
 
-.management-task-board {
-  margin-top: 22px;
-  border: 1px solid #e4ebf8;
+.management-task-board,
+.management-activity {
+  margin-top: 20px;
+  border: var(--border);
   border-radius: 14px;
-  background: #fbfcff;
+  background: rgba(255, 255, 255, 0.03);
   overflow: hidden;
 }
 
-.management-task-board h3 {
+.management-task-board h3,
+.management-activity h3 {
   margin: 0;
   padding: 12px 14px;
-  background: #eef4ff;
-  color: #23406f;
-  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: var(--border);
+}
+
+.management-task-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: var(--border);
+}
+
+.management-task-toolbar h3 {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.management-task-toolbar select {
+  border: var(--border);
+  border-radius: 10px;
+  background: var(--surface-soft);
+  color: var(--text);
+  padding: 8px 10px;
+  min-width: 180px;
 }
 
 .management-task-head {
@@ -239,11 +515,10 @@
   grid-template-columns: 1.6fr 1.2fr 1fr 0.8fr 2fr;
   gap: 10px;
   padding: 10px 14px;
-  border-top: 1px solid #e4ebf8;
-  border-bottom: 1px solid #e4ebf8;
-  color: #5a6e8f;
+  border-bottom: var(--border);
+  color: var(--text-soft);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }
@@ -260,13 +535,13 @@
   gap: 10px;
   align-items: center;
   padding: 10px 8px;
-  border: 1px solid #e4ebf8;
+  border: var(--border);
   border-radius: 10px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .management-task-row.done {
-  opacity: 0.72;
+  opacity: 0.7;
 }
 
 .management-task-row.done .m-task-title {
@@ -275,16 +550,12 @@
 
 .m-task-title {
   font-weight: 700;
-  color: #1f304e;
+  color: var(--text);
 }
 
-.m-task-member {
-  color: #506281;
-  font-weight: 600;
-}
-
+.m-task-member,
 .m-task-due {
-  color: #506281;
+  color: var(--text-soft);
   font-weight: 600;
 }
 
@@ -294,76 +565,9 @@
   gap: 6px;
 }
 
-.status-toggle-btn {
-  border: none;
-  border-radius: 8px;
-  padding: 8px 10px;
-  background: #2f6df6;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.status-toggle-btn:hover {
-  background: #1f56cf;
-}
-
-.edit-task-btn,
-.comment-task-btn,
-.delete-task-btn {
-  border: none;
-  border-radius: 8px;
-  padding: 8px 10px;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.edit-task-btn {
-  background: #2f6df6;
-}
-
-.edit-task-btn:hover {
-  background: #1f56cf;
-}
-
-.comment-task-btn {
-  background: #0ea472;
-}
-
-.comment-task-btn:hover {
-  background: #0a8f62;
-}
-
-.delete-task-btn {
-  background: #df4453;
-}
-
-.delete-task-btn:hover {
-  background: #c93748;
-}
-
-.management-activity {
-  margin-top: 22px;
-  border: 1px solid #e4ebf8;
-  border-radius: 14px;
-  background: #fbfcff;
-  overflow: hidden;
-}
-
-.management-activity h3 {
-  margin: 0;
-  padding: 12px 14px;
-  background: #eef4ff;
-  color: #23406f;
-  font-size: 1rem;
-}
-
 .activity-row {
   padding: 10px 14px;
-  border-top: 1px solid #e4ebf8;
+  border-top: var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -372,34 +576,103 @@
 
 .activity-row p {
   margin: 0;
-  color: #324766;
+  color: var(--text-soft);
   font-size: 13px;
 }
 
 .activity-row span {
-  color: #6b80a1;
+  color: var(--muted);
   font-size: 12px;
 }
 
 .management-empty {
   margin: 8px 0;
   text-align: center;
-  color: #687d9f;
+  color: var(--muted);
   font-weight: 600;
+}
+
+.management-modal-header {
+  margin-bottom: 10px;
+}
+
+.management-modal-header h3 {
+  margin: 0;
+}
+
+.management-modal-body {
+  display: grid;
+  gap: 10px;
+}
+
+.management-modal-body textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.management-modal-footer {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.management-modal-footer .ghost-btn {
+  border: var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
+.status-toggle-btn {
+  background: linear-gradient(135deg, #2fe0d0, #22b8e6);
+}
+
+.edit-task-btn {
+  background: linear-gradient(135deg, #6f9bff, #8b5cf6);
+}
+
+.comment-task-btn {
+  background: linear-gradient(135deg, #58d68d, #2fe0d0);
+}
+
+.delete-task-btn {
+  background: linear-gradient(135deg, #ff6b8a, #ff8b60);
 }
 
 @media (max-width: 960px) {
   .management {
-    padding: 18px;
+    padding: 16px;
     margin: 12px auto;
   }
 
-  .management .add-task-form {
+  .management .add-task-form,
+  .management .team-member-management {
     grid-template-columns: 1fr;
   }
 
-  .management .team-member-management {
+  .management-summary-grid {
     grid-template-columns: 1fr;
+  }
+
+  .admin-user-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-project-create,
+  .admin-project-add-member {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-bulk-delete-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-project-user-row,
+  .admin-project-member-row,
+  .admin-project-manage-head {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .management .team-member-management button {

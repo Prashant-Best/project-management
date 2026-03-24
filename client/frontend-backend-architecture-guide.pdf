@@ -1,0 +1,714 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R] /Count 7 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2344 >>
+stream
+BT
+/F1 10 Tf
+50 790 Td
+14 TL
+(DevFlow Fullstack Architecture Guide) Tj
+T*
+(Generated: February 25, 2026) Tj
+T*
+T*
+(1\) System Overview) Tj
+T*
+(DevFlow is a MERN-style application with a React + Vite frontend and an Express + MongoDB backend.) Tj
+T*
+(The frontend is responsible for user interaction, route-level navigation, local session persistence,) Tj
+T*
+(and data visualization.) Tj
+T*
+(The backend is responsible for authentication, role-based authorization, workspace state management,) Tj
+T*
+(business logic, and persistence.) Tj
+T*
+T*
+(Core technologies used:) Tj
+T*
+(- Frontend: React 19, React Router, Axios, Recharts, Vite.) Tj
+T*
+(- Backend: Node.js, Express 5, Mongoose, JWT, bcrypt.) Tj
+T*
+(- Database: MongoDB \(single workspace document model plus users collection\).) Tj
+T*
+T*
+(2\) Frontend Architecture) Tj
+T*
+(2.1 Entry and bootstrapping) Tj
+T*
+(- client/index.html contains the root mount node.) Tj
+T*
+(- client/src/main.jsx mounts App into #root under React.StrictMode.) Tj
+T*
+(- global styles are loaded from src/assets/styles/global.css.) Tj
+T*
+T*
+(2.2 Routing model) Tj
+T*
+(- App.jsx defines BrowserRouter + top-level routes.) Tj
+T*
+(- Routes:) Tj
+T*
+( / and /signup -> Signup page) Tj
+T*
+( /login -> Login page) Tj
+T*
+( /home/* -> Home shell with nested routes \(tasks/chat/visualization\)) Tj
+T*
+( /home/contacts -> Contacts page) Tj
+T*
+( /home/management -> Management page) Tj
+T*
+( /home/profile -> Profile settings) Tj
+T*
+(- The /home/* catch-all makes TaskManager the fallback sub-view.) Tj
+T*
+T*
+(2.3 API layer and auth token propagation) Tj
+T*
+(- src/services/api.js creates one Axios instance with baseURL http://localhost:3000/api.) Tj
+T*
+(- Request interceptor reads localStorage.authToken and injects Authorization: Bearer <token>.) Tj
+T*
+(- This centralizes authenticated API calls and avoids setting headers in each component.) Tj
+T*
+T*
+(2.4 Authentication and user session UX) Tj
+T*
+(Signup flow \(Signup.jsx\):) Tj
+T*
+(- Performs light client-side validation \(name length, email format, password length\).) Tj
+T*
+(- Sends POST /users/signup with name/email/password/role.) Tj
+T*
+(- On success, shows success state and redirects to /login.) Tj
+T*
+T*
+(Login flow \(Login.jsx\):) Tj
+T*
+(- Validates email/password format.) Tj
+T*
+(- Sends POST /users/login with email, password, and selected role.) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 2387 >>
+stream
+BT
+/F1 10 Tf
+50 790 Td
+14 TL
+(- On success stores token in localStorage.authToken and profile in localStorage.loggedInUser.) Tj
+T*
+(- Role-based navigation after popup:) Tj
+T*
+( management -> /home/management) Tj
+T*
+( team_member -> /home/tasks) Tj
+T*
+T*
+(2.5 Home composition and role-aware navigation) Tj
+T*
+(Home.jsx:) Tj
+T*
+(- Fetches workspace summary once on mount \(GET /workspace\).) Tj
+T*
+(- Renders profile card from localStorage user + workspace team info from API.) Tj
+T*
+(- Renders nav links for tasks/chat/visualization/profile.) Tj
+T*
+(- Conditionally renders management link only if loggedInUser.role is management.) Tj
+T*
+(- Uses nested <Routes> to switch between TaskManager, TeamChat, Visualization.) Tj
+T*
+T*
+(2.6 Task Manager behavior \(team member focus\)) Tj
+T*
+(TaskManager.jsx:) Tj
+T*
+(- Determines current user name from localStorage.) Tj
+T*
+(- Calls GET /workspace/tasks with query params:) Tj
+T*
+( assignedTo, page, limit, optional q, optional status, optional priority.) Tj
+T*
+(- Supports:) Tj
+T*
+( add task \(POST /workspace/tasks\)) Tj
+T*
+( toggle status \(PATCH /workspace/tasks/:id/toggle\)) Tj
+T*
+( search and filter \(status + priority\)) Tj
+T*
+( server-driven pagination via meta {total,page,limit,totalPages}) Tj
+T*
+(- Uses backend filtering instead of only local filtering, so pagination and counts stay consistent.) Tj
+T*
+T*
+(2.7 Team chat behavior) Tj
+T*
+(TeamChat.jsx:) Tj
+T*
+(- Initial load: GET /workspace/messages.) Tj
+T*
+(- Send message: POST /workspace/messages with {user,text}.) Tj
+T*
+(- The POST returns updated message array, immediately reflected in UI.) Tj
+T*
+(- Messages authored by current user are visually separated using conditional class "own".) Tj
+T*
+T*
+(2.8 Visualization dashboard) Tj
+T*
+(Visualization.jsx:) Tj
+T*
+(- Fetches workspace once and isolates tasks assigned to logged-in user.) Tj
+T*
+(- Computes total/completed/pending/completion rate.) Tj
+T*
+(- Uses Recharts for:) Tj
+T*
+( bar chart \(tasks by priority\)) Tj
+T*
+( pie chart \(completed vs remaining\)) Tj
+T*
+(- Also includes textual priority bars to keep summary visible without interpreting charts.) Tj
+T*
+T*
+(2.9 Management console \(admin/manager operations\)) Tj
+T*
+(Management.jsx supports full team operations:) Tj
+T*
+(- Team member CRUD:) Tj
+T*
+( add member -> POST /workspace/members) Tj
+T*
+( remove member -> DELETE /workspace/members/:memberId) Tj
+T*
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 1966 >>
+stream
+BT
+/F1 10 Tf
+50 790 Td
+14 TL
+(- Task lifecycle:) Tj
+T*
+( create assigned task with description/priority/due date) Tj
+T*
+( toggle task complete) Tj
+T*
+( edit title and due date) Tj
+T*
+( comment on task) Tj
+T*
+( delete task) Tj
+T*
+(- Activity feed:) Tj
+T*
+( GET /workspace/activity?limit=10&page=1) Tj
+T*
+(- Uses syncWorkspace helper to keep members/tasks coherent after mutations.) Tj
+T*
+(- Performs periodic refetch after writes to keep activity and board state consistent.) Tj
+T*
+T*
+(2.10 Profile and account maintenance) Tj
+T*
+(ProfileSettings.jsx:) Tj
+T*
+(- GET /users/me for profile hydration.) Tj
+T*
+(- PATCH /users/me for name/phone/\(role when allowed server-side\).) Tj
+T*
+(- PATCH /users/me/password for credential rotation.) Tj
+T*
+(- Updates localStorage.loggedInUser after profile save.) Tj
+T*
+T*
+(2.11 Navigation shell) Tj
+T*
+(Navbar.jsx and Footer.jsx provide app-level chrome.) Tj
+T*
+(- Navbar handles logout by clearing token + user and redirecting to /login.) Tj
+T*
+(- Contacts.jsx is static owner contact information.) Tj
+T*
+T*
+(3\) Backend Architecture) Tj
+T*
+(3.1 Process startup and DB connectivity) Tj
+T*
+(server/server.js:) Tj
+T*
+(- Loads environment via dotenv.) Tj
+T*
+(- Resolves MONGO_URI \(or MONGO_URL fallback\) and MONGO_DB_NAME.) Tj
+T*
+(- Fails fast if URI missing.) Tj
+T*
+(- Connects to MongoDB with serverSelectionTimeoutMS=10000.) Tj
+T*
+(- Starts HTTP listener only after successful DB connection.) Tj
+T*
+T*
+(3.2 Express app setup) Tj
+T*
+(server/app.js:) Tj
+T*
+(- Enables JSON body parsing.) Tj
+T*
+(- Applies manual CORS policy:) Tj
+T*
+( allows origins matching /^http://localhost:\\d+$/) Tj
+T*
+( allows methods GET,POST,PUT,PATCH,DELETE,OPTIONS) Tj
+T*
+( allows headers Content-Type, Authorization) Tj
+T*
+( handles preflight OPTIONS with 200) Tj
+T*
+(- Mounts route modules:) Tj
+T*
+( /api/users) Tj
+T*
+( /api/workspace) Tj
+T*
+(- Exposes health endpoint /api/health.) Tj
+T*
+T*
+(3.3 Authentication and authorization middleware) Tj
+T*
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 1941 >>
+stream
+BT
+/F1 10 Tf
+50 790 Td
+14 TL
+(middleware/auth.js:) Tj
+T*
+(- requireAuth:) Tj
+T*
+( parses Bearer token from Authorization header) Tj
+T*
+( verifies JWT using JWT_SECRET) Tj
+T*
+( attaches payload to req.user) Tj
+T*
+( returns 401 on missing/invalid/expired token) Tj
+T*
+(- requireRole\(...roles\):) Tj
+T*
+( enforces role-based access and returns 403 on mismatch) Tj
+T*
+T*
+(3.4 User module) Tj
+T*
+(Routes \(routes/userRoutes.js\):) Tj
+T*
+(- GET /api/users \(management only\)) Tj
+T*
+(- POST /api/users and POST /api/users/signup \(create user\)) Tj
+T*
+(- DELETE /api/users/:id \(management only\)) Tj
+T*
+(- POST /api/users/login) Tj
+T*
+(- GET /api/users/me) Tj
+T*
+(- PATCH /api/users/me) Tj
+T*
+(- PATCH /api/users/me/password) Tj
+T*
+T*
+(Controller highlights \(controllers/userController.js\):) Tj
+T*
+(- createUsers:) Tj
+T*
+( validates required fields and role enum) Tj
+T*
+( rejects duplicate email) Tj
+T*
+( hashes password with bcrypt salt rounds 10) Tj
+T*
+(- loginUser:) Tj
+T*
+( validates role selection and role-account consistency) Tj
+T*
+( supports legacy plaintext password migration to bcrypt on successful login) Tj
+T*
+( issues JWT \(7d\) containing id/email/role/name) Tj
+T*
+(- updateProfile:) Tj
+T*
+( allows name/phone updates for self) Tj
+T*
+( allows role update only when caller is management) Tj
+T*
+(- changePassword:) Tj
+T*
+( verifies current password then writes new bcrypt hash) Tj
+T*
+T*
+(3.5 Workspace module) Tj
+T*
+(Routes \(routes/workspaceRoutes.js\):) Tj
+T*
+(- All workspace routes are auth-protected via router.use\(requireAuth\).) Tj
+T*
+(- Management-only operations:) Tj
+T*
+( add/remove members, delete task, fetch activity log.) Tj
+T*
+T*
+(Controller highlights \(controllers/workspaceController.js\):) Tj
+T*
+(- getOrCreateWorkspace:) Tj
+T*
+( ensures a singleton workspace document exists.) Tj
+T*
+(- Legacy cleanup:) Tj
+T*
+( detects historical seeded placeholder members and removes them once.) Tj
+T*
+(- getTasks:) Tj
+T*
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 1868 >>
+stream
+BT
+/F1 10 Tf
+50 790 Td
+14 TL
+( supports server-side filtering by text, priority, status, assignedTo with pagination.) Tj
+T*
+(- addTask/updateTask/toggleTask/deleteTask:) Tj
+T*
+( task lifecycle mutations with validation and activity audit logging.) Tj
+T*
+(- addTaskComment:) Tj
+T*
+( appends comment entries directly under task.comments.) Tj
+T*
+(- getMessages/addMessage:) Tj
+T*
+( chat persistence in workspace.messages with paging for read path.) Tj
+T*
+(- getActivityLog:) Tj
+T*
+( filtered + paginated audit trail with action and free-text search.) Tj
+T*
+(- addActivity:) Tj
+T*
+( prepends log entries and caps total size at 500 to limit unbounded growth.) Tj
+T*
+T*
+(4\) Data Model Design) Tj
+T*
+(4.1 User model) Tj
+T*
+(Collection: users) Tj
+T*
+(Fields:) Tj
+T*
+(- name \(required\)) Tj
+T*
+(- email \(required, unique, lowercase, trim\)) Tj
+T*
+(- password \(required, min 6, bcrypt hash\)) Tj
+T*
+(- phone \(optional string\)) Tj
+T*
+(- role \(management | team_member\)) Tj
+T*
+(- timestamps) Tj
+T*
+T*
+(4.2 Workspace model \(single-document aggregate\)) Tj
+T*
+(Collection: workspaces) Tj
+T*
+(Top-level fields:) Tj
+T*
+(- teamName, teamHead, leaderContact) Tj
+T*
+(- members[]) Tj
+T*
+(- tasks[]) Tj
+T*
+(- messages[]) Tj
+T*
+(- activityLog[]) Tj
+T*
+T*
+(Embedded schemas:) Tj
+T*
+(- member: {name}) Tj
+T*
+(- task: {title,description,priority,done,assignedTo,dueDate,comments[]}) Tj
+T*
+(- comment: {user,text,createdAt}) Tj
+T*
+(- message: {user,text,createdAt}) Tj
+T*
+(- activityLog: {actor,action,targetType,targetId,details,createdAt}) Tj
+T*
+T*
+(Tradeoff note:) Tj
+T*
+(- Single workspace document simplifies transactions and retrieval for small-medium teams.) Tj
+T*
+(- As activity/messages/tasks scale, document size and update contention can become a bottleneck.) Tj
+T*
+T*
+(5\) End-to-End Request Flows) Tj
+T*
+(5.1 Login flow) Tj
+T*
+(1. Frontend POST /api/users/login.) Tj
+T*
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 15 0 R >>
+endobj
+15 0 obj
+<< /Length 2522 >>
+stream
+BT
+/F1 10 Tf
+50 790 Td
+14 TL
+(2. Backend validates credentials and role, returns token + profile.) Tj
+T*
+(3. Frontend stores token/profile in localStorage.) Tj
+T*
+(4. Subsequent Axios calls include Bearer token via interceptor.) Tj
+T*
+T*
+(5.2 Team member task flow) Tj
+T*
+(1. TaskManager GET /api/workspace/tasks?assignedTo=<name>&filters.) Tj
+T*
+(2. Backend filters, paginates, returns data + meta.) Tj
+T*
+(3. User toggles task -> PATCH /api/workspace/tasks/:id/toggle.) Tj
+T*
+(4. Backend updates task.done and writes activity log.) Tj
+T*
+(5. Frontend refreshes list.) Tj
+T*
+T*
+(5.3 Management assignment flow) Tj
+T*
+(1. Manager creates member/task via management UI.) Tj
+T*
+(2. Backend persists changes and activity log entries.) Tj
+T*
+(3. Team member sees assigned tasks filtered by own name.) Tj
+T*
+T*
+(5.4 Chat flow) Tj
+T*
+(1. Client loads recent messages using GET /api/workspace/messages.) Tj
+T*
+(2. New message POST /api/workspace/messages.) Tj
+T*
+(3. Backend appends message and audit record.) Tj
+T*
+(4. Updated messages are returned for immediate UI sync.) Tj
+T*
+T*
+(6\) Security and Reliability Notes) Tj
+T*
+(Current strengths:) Tj
+T*
+(- JWT-based stateless authentication.) Tj
+T*
+(- Role-based route protection for privileged operations.) Tj
+T*
+(- Password hashing with bcrypt.) Tj
+T*
+(- Server-side validation on critical fields and enums.) Tj
+T*
+(- Structured error responses and health endpoint.) Tj
+T*
+T*
+(Important gaps to address for production:) Tj
+T*
+(- JWT secret defaults to hardcoded fallback; must be environment-only in production.) Tj
+T*
+(- Tokens are kept in localStorage \(XSS exposure risk\). Consider secure HttpOnly cookies.) Tj
+T*
+(- CORS is localhost-only; production environment whitelist/configuration is needed.) Tj
+T*
+(- No rate limiting/brute-force protection on login.) Tj
+T*
+(- No centralized schema validation layer \(e.g., zod/joi\) for all payloads.) Tj
+T*
+(- No refresh-token strategy or session revocation.) Tj
+T*
+(- Management page still uses prompt\(\) for edits/comments \(UX and audit limitations\).) Tj
+T*
+T*
+(7\) Scalability Considerations) Tj
+T*
+(- Split workspace aggregate into separate collections when task/message volume grows.) Tj
+T*
+(- Add indexes for frequent filters \(assignedTo, priority, done, createdAt\).) Tj
+T*
+(- Introduce websocket layer for chat and realtime board updates.) Tj
+T*
+(- Add optimistic UI updates with rollback on failure for better responsiveness.) Tj
+T*
+(- Move from polling/refetch-after-write to event-driven invalidation.) Tj
+T*
+T*
+ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 17 0 R >>
+endobj
+17 0 obj
+<< /Length 1485 >>
+stream
+BT
+/F1 10 Tf
+50 790 Td
+14 TL
+(8\) Testing Coverage Suggestions) Tj
+T*
+(Backend:) Tj
+T*
+(- Unit tests for controller validation and role guards.) Tj
+T*
+(- Integration tests for auth + protected route matrix.) Tj
+T*
+(- Regression tests for task filtering/pagination combinations.) Tj
+T*
+(Frontend:) Tj
+T*
+(- Component tests for login/signup validation.) Tj
+T*
+(- Integration tests for task actions and management workflows.) Tj
+T*
+(- Routing tests for role-based visibility and redirection.) Tj
+T*
+T*
+(9\) Quick File Map) Tj
+T*
+(Frontend key files:) Tj
+T*
+(- client/src/App.jsx) Tj
+T*
+(- client/src/pages/Login.jsx) Tj
+T*
+(- client/src/pages/Signup.jsx) Tj
+T*
+(- client/src/pages/Home.jsx) Tj
+T*
+(- client/src/components/TaskManager.jsx) Tj
+T*
+(- client/src/components/TeamChat.jsx) Tj
+T*
+(- client/src/components/Visualization.jsx) Tj
+T*
+(- client/src/components/Management.jsx) Tj
+T*
+(- client/src/components/ProfileSettings.jsx) Tj
+T*
+(- client/src/services/api.js) Tj
+T*
+T*
+(Backend key files:) Tj
+T*
+(- server/server.js) Tj
+T*
+(- server/app.js) Tj
+T*
+(- server/middleware/auth.js) Tj
+T*
+(- server/routes/userRoutes.js) Tj
+T*
+(- server/routes/workspaceRoutes.js) Tj
+T*
+(- server/controllers/userController.js) Tj
+T*
+(- server/controllers/workspaceController.js) Tj
+T*
+(- server/models/user.js) Tj
+T*
+(- server/models/workspace.js) Tj
+T*
+T*
+(This document was generated from the current repository implementation and reflects actual code) Tj
+T*
+(behavior at generation time.) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000155 00000 n 
+0000000225 00000 n 
+0000000351 00000 n 
+0000002747 00000 n 
+0000002873 00000 n 
+0000005312 00000 n 
+0000005438 00000 n 
+0000007456 00000 n 
+0000007584 00000 n 
+0000009578 00000 n 
+0000009706 00000 n 
+0000011627 00000 n 
+0000011755 00000 n 
+0000014330 00000 n 
+0000014458 00000 n 
+trailer
+<< /Size 18 /Root 1 0 R >>
+startxref
+15996
+%%EOF

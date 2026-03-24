@@ -45,7 +45,7 @@ export default function Login() {
     setShowPopup(false);
     const saved = localStorage.getItem("loggedInUser");
     const currentUser = saved ? JSON.parse(saved) : null;
-    if (currentUser?.role === "management") {
+    if (currentUser?.role === "management" || currentUser?.role === "admin") {
       navigate("/home/management");
       return;
     }
@@ -77,8 +77,10 @@ export default function Login() {
 
           <label>Role</label>
           <select value={role} onChange={(e) => setRole(e.target.value)} required>
+            <option value="viewer">Viewer</option>
             <option value="team_member">Team Member</option>
             <option value="management">Management</option>
+            <option value="admin">Admin</option>
           </select>
 
           {error && <p className="login-error">{error}</p>}

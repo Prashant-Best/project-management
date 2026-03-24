@@ -5,9 +5,9 @@
 .visualization h2 {
   text-align: center;
   margin: 4px 0 14px;
-  color: #1f56cf;
+  color: var(--accent);
   font-size: 1.85rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .visualization-error {
@@ -38,50 +38,51 @@
 .stat-card {
   padding: 14px;
   border-radius: 12px;
-  border: 1px solid #e4ebf8;
-  background: #fbfcff;
-  box-shadow: 0 6px 14px rgba(42, 65, 105, 0.08);
+  border: var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
   text-align: center;
+  animation: fadeUp 0.35s ease both;
 }
 
 .stat-card h3 {
   margin: 0 0 6px;
   font-size: 0.9rem;
-  color: #3a4f72;
+  color: var(--text-soft);
 }
 
 .stat-card p {
   margin: 0;
-  color: #1d3154;
+  color: var(--accent);
   font-size: 1.35rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .priority-section {
-  border: 1px solid #e4ebf8;
+  border: var(--border);
   border-radius: 12px;
   padding: 14px;
-  background: #fbfcff;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .priority-section h3 {
   margin: 0 0 10px;
-  color: #2a4169;
+  color: var(--accent);
 }
 
 .priority-bar {
   border-radius: 9px;
   padding: 8px 10px;
   margin-bottom: 7px;
-  color: #fff;
-  font-weight: 700;
+  color: #f7fbff;
+  font-weight: 600;
   font-size: 0.92rem;
 }
 
-.priority-bar.urgent { background: #e44d5e; }
-.priority-bar.high { background: #f1b321; color: #3d2f0a; }
-.priority-bar.medium { background: #0ea472; }
-.priority-bar.low { background: #2f6df6; }
+.priority-bar.urgent { background: linear-gradient(135deg, #ff5f88, #ff8b60); }
+.priority-bar.high { background: linear-gradient(135deg, #ffb347, #ffcf5a); color: #2a1b00; }
+.priority-bar.medium { background: linear-gradient(135deg, #2fe0d0, #22b8e6); }
+.priority-bar.low { background: linear-gradient(135deg, #6fa0ff, #8b5cf6); }
 
 .dashboard-right {
   display: grid;
@@ -89,17 +90,17 @@
 }
 
 .chart-card {
-  border: 1px solid #e4ebf8;
+  border: var(--border);
   border-radius: 14px;
   padding: 12px;
-  background: #fff;
-  box-shadow: 0 8px 16px rgba(42, 65, 105, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.32);
 }
 
 .chart-card h3 {
   margin: 2px 0 8px;
   text-align: center;
-  color: #2a4169;
+  color: var(--accent);
   font-size: 1rem;
 }
 

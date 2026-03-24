@@ -3,38 +3,42 @@
   justify-content: space-between;
   align-items: center;
   padding: 14px 24px;
-  background: linear-gradient(115deg, #1f56cf 0%, #2f6df6 55%, #25a1ff 100%);
-  color: white;
+  background: linear-gradient(130deg, rgba(21, 33, 66, 0.96) 0%, rgba(11, 20, 42, 0.98) 100%);
+  color: var(--text);
   border-radius: 16px;
   margin: 12px auto 0;
-  max-width: 1200px;
-  box-shadow: 0 14px 28px rgba(29, 75, 175, 0.3);
+  max-width: 1280px;
+  box-shadow: var(--shadow-md);
+  border: var(--border);
+  animation: fadeUp 0.36s ease both;
 }
 
 .nav-logo {
-  font-weight: 800;
+  font-weight: 700;
   font-size: 22px;
   letter-spacing: 0.3px;
   cursor: pointer;
+  color: var(--accent);
 }
 
 .nav-left button,
 .nav-right button {
   margin-left: 10px;
   padding: 9px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: var(--border);
   border-radius: 10px;
   cursor: pointer;
-  font-weight: 700;
-  color: white;
-  background: rgba(255, 255, 255, 0.14);
+  font-weight: 600;
+  color: var(--text-soft);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(2px);
-  transition: all 0.2s ease;
 }
 
 .nav-left button:hover,
 .nav-right button:hover {
-  background: rgba(255, 255, 255, 0.26);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #f8fbff;
+  border-color: rgba(123, 216, 255, 0.7);
   transform: translateY(-1px);
 }
 
@@ -61,11 +65,12 @@
   position: absolute;
   top: 50px;
   right: 0;
-  background: white;
-  color: #333;
+  background: #141414;
+  color: var(--text);
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: var(--shadow-md);
+  border: var(--border);
   display: none;
   width: 220px;
   z-index: 10;
@@ -84,24 +89,25 @@
   margin-top: 10px;
   width: 100%;
   padding: 9px 0;
-  background: #df4453;
-  border: 1px solid transparent;
-  color: white;
+  background: linear-gradient(135deg, #ff7f9f, #ff9b71);
+  border: 1px solid rgba(255, 187, 170, 0.8);
+  color: #fff;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 700;
 }
 
 .logout-btn:hover {
-  background: #c93748;
+  background: linear-gradient(135deg, #ff5f88, #ff8b60);
 }
 
 .nav-logout-btn {
   width: auto;
   padding: 9px 16px;
   margin-top: 0;
-  background: rgba(223, 68, 83, 0.9) !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
+  background: linear-gradient(135deg, #ff7f9f, #ff9b71) !important;
+  color: #fff !important;
+  border-color: rgba(255, 187, 170, 0.8) !important;
 }
 
 .nav-left {

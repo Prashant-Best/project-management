@@ -35,3 +35,8 @@ coverage/
 Thumbs.db
 .vscode/
 .idea/
+
+# Vercel
+.vercel
+.vscode/settings.json
+out/

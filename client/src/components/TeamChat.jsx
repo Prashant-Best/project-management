@@ -13,6 +13,7 @@ export default function TeamChat() {
     () => (loggedInUser?.name || "User").trim() || "User",
     [loggedInUser?.name]
   );
+  const canChat = loggedInUser?.role !== "viewer";
 
   const fetchMessages = async () => {
     try {
@@ -25,11 +26,13 @@ export default function TeamChat() {
 
   useEffect(() => {
     fetchMessages();
+    const timer = setInterval(fetchMessages, 7000);
+    return () => clearInterval(timer);
   }, []);
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || !canChat) return;
 
     try {
       setError("");
@@ -67,11 +70,12 @@ export default function TeamChat() {
       <form className="chat-input-area" onSubmit={sendMessage}>
         <input
           type="text"
-          placeholder="Type a message..."
+          placeholder={canChat ? "Type a message..." : "Viewer mode: chat is read-only"}
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          disabled={!canChat}
         />
-        <button type="submit">Send</button>
+        <button type="submit" disabled={!canChat}>Send</button>
       </form>
     </div>
   );
