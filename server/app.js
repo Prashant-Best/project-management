@@ -24,6 +24,15 @@ app.use((req, res, next) => {
 const userRoutes = require('./routes/userRoutes.js');
 const workspaceRoutes = require("./routes/workspaceRoutes.js");
 const projectRoutes = require("./routes/projectRoutes.js");
+
+app.get("/", (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "DevFlow backend is running",
+    health: "/api/health",
+  });
+});
+
 app.use('/api/users', userRoutes);
 app.use("/api/workspace", workspaceRoutes);
 app.use("/api/projects", projectRoutes);
